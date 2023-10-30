@@ -1,0 +1,40 @@
+:root {
+  --background: #282a36;
+  --accent-text: #8be9fd;
+  --yellow: #f1fa8c;
+  --button: linear-gradient(180deg, #e4e4e4 0%, #f7f7f7 100%);
+  --white: #fff;
+  --gray: #bfbfbf;
+  --dark-gray: #44475a;
+  --black: #191a21;
+  --black-50: #191a2194;
+  --pink: #ff79c6;
+  --blue: #8be9fd;
+  --green: #50fa7b;
+  --purple: #bd93f9;
+  --orange: #ffb86c;
+  --invalid: #ff5555;
+  font-size: 16px;
+}
+
+.white {
+  color: var(--white);
+}
+.pink {
+  color: var(--pink);
+}
+.blue {
+  color: var(--blue);
+}
+.green {
+  color: var(--green);
+}
+.purple {
+  color: var(--purple);
+}
+.orange {
+  color: var(--orange);
+}
+.yellow {
+  color: var(--yellow);
+}

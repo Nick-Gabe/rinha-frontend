@@ -1,0 +1,41 @@
+@import url(./variables.css);
+@import url(./utilitary.css);
+@import url(./json-tree.css);
+@import url(./loading.css);
+
+* {
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--background);
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* align-self: center; */
+  min-width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: auto;
+  padding: 0 10vw;
+}
+
+@media (max-width: 400px) {
+  body {
+    align-items: flex-start;
+  }
+}

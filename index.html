@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rinha de Front - Nick Gabe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <meta name="description" content="A website to view a JSON tree" />
+    <meta name="theme-color" content="#191a21" />
+  </head>
+  <body>
+    <main>
+      <h1 class="title text-center">
+        <span class="pink">JSON</span>
+        <span class="white">Tree Viewer</span>
+      </h1>
+      <div class="credits">
+        <p>
+          Made by
+          <a href="https://x.com/imnickgabe" target="_blank">@Nick Gabe</a>
+        </p>
+      </div>
+      <p class="text-center subtitle white">
+        Simple JSON Viewer that runs completely on-client. No data exchange
+      </p>
+      <form>
+        <label class="json-upload" tabindex="0" for="json-upload"
+          >Load JSON</label
+        >
+        <input
+          class="text-center"
+          id="json-upload"
+          type="file"
+          accept=".json"
+        />
+      </form>
+    </main>
+    <script src="./index.js"></script>
+  </body>
+</html>
