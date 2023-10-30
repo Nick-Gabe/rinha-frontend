@@ -305,7 +305,7 @@ document.addEventListener("scroll", () => {
       window.scrollY >
       document.body.clientHeight - window.innerHeight - LINE_HEIGHT * 3
     ) {
-      maxLinesRender += 50;
+      maxLinesRender += 500;
       parseAndInsertJson(parsedJson);
     }
   }, 100);
