@@ -65,6 +65,13 @@ function throttle(callback, interval) {
   const startObjectBracket = startArrayBracket.cloneNode(false);
   startObjectBracket.textContent = "{";
 
+  const endInlineArrayBracket = document.createElement("span");
+  endInlineArrayBracket.className = `bracket inline`;
+  endInlineArrayBracket.textContent = "]";
+
+  const endInlineObjectBracket = endInlineArrayBracket.cloneNode(false);
+  endInlineObjectBracket.textContent = "}";
+
   const endArrayBracket = document.createElement("p");
   endArrayBracket.className = `bracket`;
   endArrayBracket.textContent = "]";
@@ -88,6 +95,8 @@ function throttle(callback, interval) {
     startObjectBracket,
     endArrayBracket,
     endObjectBracket,
+    endInlineArrayBracket,
+    endInlineObjectBracket,
     group,
     p,
   };
@@ -208,6 +217,7 @@ function createGroup({ isArray, outerGroup, data, key, level }) {
     BRACKET_COLORIZER_ORDER[level % BRACKET_COLORIZER_ORDER.length];
 
   const isInsideArray = outerGroup?.dataset.grouptype || false;
+  const isDataEmpty = Object.keys(data).length === 0;
 
   const colon = elements.colon.cloneNode(true);
   const keySpan = elements[`${isInsideArray || "object"}Key`].cloneNode(false);
@@ -215,21 +225,35 @@ function createGroup({ isArray, outerGroup, data, key, level }) {
   const bracket =
     elements[`start${isArray ? "Array" : "Object"}Bracket`].cloneNode(true);
   bracket.classList.add(bracketColor);
+  const endInlineBracket =
+    elements[`endInline${isArray ? "Array" : "Object"}Bracket`].cloneNode(true);
+  endInlineBracket.classList.add(bracketColor);
   const endBracket =
     elements[`end${isArray ? "Array" : "Object"}Bracket`].cloneNode(true);
   endBracket.classList.add(bracketColor);
 
   content.append(keySpan, colon, bracket);
+
+  if (isDataEmpty) {
+    content.append(endInlineBracket);
+  }
+
   outerGroup.append(content);
 
   const newGroup = elements.group.cloneNode(false);
   newGroup.id = lastRenderedLine.join("-");
   newGroup.classList.add(bracketColor);
   newGroup.setAttribute("data-groupType", groupType);
-  outerGroup.append(newGroup);
+
+  if (!isDataEmpty) {
+    outerGroup.append(newGroup);
+  }
 
   parseAndInsertJson(data, newGroup, groupType, level);
-  outerGroup.append(endBracket);
+
+  if (!isDataEmpty) {
+    outerGroup.append(endBracket);
+  }
 }
 
 function createProperty({ key, groupType, data, group }) {
@@ -301,10 +325,11 @@ jsonButton?.addEventListener("change", onJsonSubmit);
 document.addEventListener("scroll", () => {
   throttle(() => {
     adjustHeaderSize();
-    if (
-      window.scrollY >
-      document.body.clientHeight - window.innerHeight - LINE_HEIGHT * 3
-    ) {
+    const scrollableHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPosition = window.scrollY;
+
+    if ((scrollPosition / scrollableHeight) * 100 >= 95) {
       maxLinesRender += 500;
       parseAndInsertJson(parsedJson);
     }

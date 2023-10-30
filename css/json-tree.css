@@ -29,6 +29,10 @@ main > .group {
   border-color: currentColor;
 }
 
+.bracket.inline {
+  margin-left: 5px;
+}
+
 /* types of content */
 .string {
   color: var(--yellow);
@@ -50,7 +54,8 @@ main > .group {
   color: var(--pink);
 }
 
-.group > :not(:last-child).bracket::after {
+.group > :not(:last-child).bracket::after,
+.group > :not(:last-child) > .bracket.inline::after {
   content: ",";
   color: var(--white);
 }
